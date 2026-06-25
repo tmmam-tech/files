@@ -6,30 +6,84 @@
     <title>استضافة الملفات — تمام للتقنية</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body, html { width:100%; height:100%; overflow:hidden; background:#0a0a0a; }
+        body, html {
+            width: 100%; height: 100%;
+            background: #0a0a0a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* شريط علوي للتنقل */
         .topbar {
-            background:#111; color:#d4af37; text-align:center;
-            padding:10px; font-size:1em; font-weight:bold;
-            border-bottom:1px solid #2a2a2a; z-index:10; position:relative;
+            background: #111;
+            color: #d4af37;
+            text-align: center;
+            padding: 12px;
+            font-size: 1em;
+            font-weight: bold;
+            border-bottom: 1px solid #2a2a2a;
+            z-index: 10;
+            position: relative;
         }
-        .topbar a { color:#d4af37; text-decoration:none; margin:0 5px; }
-        iframe { width:100%; height:calc(100% - 45px); border:none; display:block; }
-        /* زر للجوال */
+        .topbar a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        /* الإيفريم يظهر على الديسكتوب */
+        iframe {
+            width: 100%;
+            height: calc(100% - 46px);
+            border: none;
+            display: block;
+        }
+        /* طبقة الترحيب (تظهر على الجوال أو عند فشل الإيفريم) */
         .fallback {
-            display: none; /* مخفي افتراضياً */
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center; z-index:20;
+            display: none;
+            position: absolute;
+            top: 46px; /* تحت الشريط */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 46px);
+            background: #0a0a0a;
+            color: #fff;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 20;
         }
-        .fallback a {
-            display: inline-block; background:#d4af37; color:#0a0a0a;
-            padding: 15px 30px; border-radius: 30px; text-decoration: none;
-            font-weight: bold; font-size:1.2em; margin-top:20px;
+        .fallback h2 {
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-size: clamp(1.5em, 4vw, 2em);
         }
-        /* يظهر على الجوال (شاشات أقل من 768px) */
+        .fallback p {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        .fallback .btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #0a0a0a;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .fallback .btn:hover {
+            background: #e0c04a;
+            transform: scale(1.03);
+        }
+        /* على الجوال نخفي الإيفريم ونظهر الرسالة */
         @media (max-width: 768px) {
-            iframe { display: none; } /* نخفي الإيفريم */
-            .fallback { display: block; } /* نظهر البديل */
+            iframe { display: none; }
+            .fallback { display: flex; }
         }
     </style>
 </head>
@@ -40,14 +94,15 @@
         ☁️ استضافة الملفات
     </div>
 
-    <!-- محاولة الإيفريم -->
+    <!-- محاولة عرض الاستضافة داخل iframe (للديسكتوب) -->
     <iframe src="https://tmmamfiles.infinityfreeapp.com" title="استضافة الملفات"></iframe>
 
-    <!-- بديل أنيق للجوال أو عند فشل الإيفريم -->
+    <!-- واجهة أنيقة للجوال أو عند فشل الإيفريم -->
     <div class="fallback">
-        <p style="color:#fff; font-size:1.2em;">📂 للوصول إلى استضافة الملفات</p>
-        <a href="https://tmmamfiles.infinityfreeapp.com" target="_blank">افتح الموقع الآن 🚀</a>
-        <p style="color:#888; margin-top:15px; font-size:0.9em;">(يمكنك إغلاق التبويب للعودة)</p>
+        <h2>📁 تمام للتقنية</h2>
+        <p>استضافة ملفات سريعة وآمنة. اضغط على الزر أدناه للدخول إلى لوحة الرفع والتحميل.</p>
+        <a href="https://tmmamfiles.infinityfreeapp.com" target="_blank" class="btn">🚀 افتح استضافة الملفات</a>
+        <p style="margin-top: 20px; font-size: 0.9em; color: #888;">سيتم فتح الموقع في تبويب جديد.</p>
     </div>
 </body>
 </html>
