@@ -84,7 +84,7 @@
         <p>مرحباً بك في خدمة استضافة الملفات من تمام للتقنية. لرفع وتحميل الملفات، اضغط على الزر أدناه.</p>
         <a href="https://tmmamfiles.infinityfreeapp.com" target="_blank" class="btn">📂 افتح استضافة الملفات</a>
     </div>
-    <!-- صندوق العداد الذهبي النهائي -->
+</body><!-- ========== العداد الذهبي النابض (عداد محلي) ========== -->
 <style>
     .tmmam-counter-wrapper {
         text-align: center;
@@ -164,43 +164,21 @@
 </div>
 
 <script>
-    const span = document.getElementById('tmmam-visit-count');
-    // نحاول أولاً جلب الرقم من CountAPI (العداد الحقيقي الموحد)
-    const API_URL = 'https://api.countapi.xyz/hit/tmmamtech.xyz/visits';
-
-    async function tryCountAPI() {
-        try {
-            const response = await fetch(API_URL, { cache: 'no-store' });
-            if (response.ok) {
-                const data = await response.json();
-                return data.value; // نجحنا
-            }
-        } catch (e) {}
-        return null; // فشل
+(function() {
+    var span = document.getElementById("tmmam-visit-count");
+    if (!span) return;
+    var key = "tmmam_visits_home";
+    var count = localStorage.getItem(key);
+    if (!count) {
+        count = 1;
+    } else {
+        count = parseInt(count) + 1;
     }
-
-    function useLocalCounter() {
-        let count = localStorage.getItem('tmmam_visits_home');
-        if (!count) {
-            count = 1;
-        } else {
-            count = parseInt(count) + 1;
-        }
-        localStorage.setItem('tmmam_visits_home', count);
-        return count;
-    }
-
-    async function updateCounter() {
-        let count = await tryCountAPI(); // يحاول الرابط الخارجي
-        if (count === null) {
-            // إذا فشل، يستخدم العداد المحلي (لن يخذلك أبداً)
-            count = useLocalCounter();
-        }
-        span.textContent = count;
-        // تأثير الترحيب
-        span.style.transform = 'scale(1.4)';
-        setTimeout(() => { span.style.transform = 'scale(1)'; }, 300);
-    }
-
-    updateCounter();
+    localStorage.setItem(key, count);
+    span.textContent = count;
+    span.style.transform = "scale(1.4)";
+    setTimeout(function() {
+        span.style.transform = "scale(1)";
+    }, 300);
+})();
 </script>
